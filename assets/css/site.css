@@ -522,3 +522,9 @@ html,body{overflow-x:clip}
 
 .nav__wordmark{height:26px;width:auto;display:block}
 .hero__mark{width:min(520px,70vw);height:auto;margin-bottom:22px}
+/* wordmark mode (site.logo) */
+.nav__mark{width:auto;height:34px}
+.nav__mark img{position:static;inset:auto;width:auto;height:34px}
+.nav__logo:hover .nav__mark img{transform:rotate(-3deg) scale(1.04)}
+.loader__stage--logo{width:min(78vw,640px);aspect-ratio:1472/343}
+.card__grade--word{font-size:clamp(46px,7vh,76px)!important;line-height:.9;letter-spacing:-.05em}

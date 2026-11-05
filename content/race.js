@@ -13,7 +13,8 @@ window.CONTENT = {
     slug: 'karoo',
     title: 'Karoo Crawl · Run further than you ever have',
     description: 'The Karoo Crawl at Place of Dreams, Tankwa Karoo. No set distance. One valley loop. Run until you’ve gone further than you ever have. 100 places.',
-    navTitle: '<img class="nav__wordmark" src="assets/karoo-crawl-logo.svg" alt="Karoo Crawl">',
+    logo: 'assets/karoo-crawl-logo.svg',   // wordmark in the nav + loader (no runner illustration)
+    logoAlt: 'Karoo Crawl',
     navSub: 'Place of Dreams · 100 places',
     navCta: 'tickets.html',
     countdownLabel: 'Next crawl in',
@@ -23,14 +24,11 @@ window.CONTENT = {
   nav: [
     ['index.html', 'Home', 'home'],
     ['about.html', 'About the Crawl', 'about'],
-    ['tickets.html', 'Get your tickets<span class="tag">100</span>', 'tickets']
+    ['tickets.html', 'Get your tickets<span class="tag">100</span>', 'tickets'],
+    ['partners.html', 'Partners', 'partners']
   ],
 
-  runner: {
-    name: 'Barney',
-    image: 'assets/barney.webp',
-    imageAlt: 'Barney, seated, which is how most people finish this'
-  },
+  runner: { name: 'you' },
 
   race: {
     name: 'Karoo Crawl',
@@ -103,18 +101,19 @@ window.CONTENT = {
         ]
       },
       report: {
-        eyebrow: '02 · What to expect',
-        title: 'We graded the course. It wasn’t close.',
+        eyebrow: '02 · The event',
+        title: 'Everything you need to know. It isn’t much.',
+        // big value + title + text, shuffled in like a deck as you scroll
         cards: [
-          { colour: 'olive', icon: 'DST', grade: '?', title: 'Distance', text: 'There isn’t one. You run until you’ve beaten your longest run ever. The course doesn’t know your PB. You do. You can’t lie to it, but people will try.' },
-          { colour: 'sky', icon: 'VRT', grade: 'B', title: 'Vert', text: 'About six hundred metres a lap. Do four laps and do the maths. Actually, don’t do the maths.' },
-          { colour: 'blue', icon: 'SIG', grade: 'F', title: 'Signal', text: 'None. Your Strava will upload on Monday, in Ceres, at a Wimpy, to a standing ovation from no one.' },
-          { colour: 'paper', icon: 'VUE', grade: 'A', title: 'The valley', text: 'Genuinely beautiful. You will see it for four seconds per lap, between looking at your feet and looking for the bus.' },
-          { colour: 'navy', icon: 'AID', grade: 'A', title: 'Aid', text: 'The Cannon and the Party Bus. Every lap. One of them has a sound system. It isn’t the cannon.' },
-          { colour: 'lime', icon: 'VIB', grade: 'A+', title: 'Après', text: 'Pool. Braai. A man in a white shirt holding tongs like a weapon. The real race is the one to the fire.' }
+          { colour: 'orange', icon: 'DST', grade: 'Further', title: 'The format', text: 'No set distance. One valley loop, as many laps as it takes to go further than you ever have. Your finish line is your old longest run, plus one step.' },
+          { colour: 'olive', icon: 'LOC', grade: 'Tankwa', title: 'Place of Dreams', text: 'Private wilderness in the Karoo Hoogland, about 50 minutes past Ceres on the R356. Stone pods, a canyon, a pool, no signal.' },
+          { colour: 'sky', icon: 'AID', grade: '2', title: 'Aid stations, every lap', text: 'The Cannon at the mouth of the valley and the Party Bus at the top of the climb. Water, Coke, food, and a sound system that isn’t on the cannon.' },
+          { colour: 'navy', icon: 'CAP', grade: '100', title: 'Places', text: 'A hundred runners. A hundred different finish lines. One valley, one braai.' },
+          { colour: 'lime', icon: 'GUN', grade: '05:55', title: 'Start', text: 'Headtorches on, in the dark, at Place of Dreams. Sunrise arrives somewhere around lap one.' },
+          { colour: 'paper', icon: 'END', grade: 'Braai', title: 'The finish', text: 'When you’ve gone further than ever, you stop. Then there is a fire, a pool and a lot of people lying about how many laps they did.' }
         ],
-        stamp: 'OVERALL: PB',
-        stampSmall: 'Will go further than ever · Will mention it at work for a year'
+        stamp: '100 PLACES',
+        stampSmall: 'One valley · No distance · Tickets soon'
       },
       route: {
         eyebrow: '03 · The loop (indicative)',
@@ -209,6 +208,49 @@ window.CONTENT = {
       registerLabel: 'Email us to get on the list',
       cta: { photo: 'assets/img/braai.jpg', eyebrow: 'The finish', title: ['See you at', 'the fire.'],
         links: [['about.html', 'About the Crawl'], ['index.html', 'Home']] }
+    },
+
+    partners: {
+      eyebrow: 'Partners & sponsors',
+      title: ['Put your name', 'on a valley.', '*Literally.'],
+      lede: 'The Karoo Crawl is a hundred people trying to run further than they ever have, in the middle of nowhere, on purpose. We’re looking for a few brands who think that’s a good idea. Or at least a funny one.',
+      whyTitle: ['Why bother'],
+      why: [
+        ['A hundred people at their limit', 'Everyone here is attempting the longest run of their life. They will remember who handed them a Coke at the Party Bus for the rest of their lives. That’s not marketing, it’s trauma bonding.'],
+        ['Content that makes itself', 'Sunrise in the Tankwa, headtorches in a valley, a bus having a party at the top of a climb. Shot on film. Your logo will look better here than anywhere else it’s been.'],
+        ['Small on purpose', 'A hundred places, not ten thousand. Nobody is a number on a bib wall. Your brand isn’t either.']
+      ],
+      packagesTitle: ['Ways in'],
+      packagesLede: 'Three ways to be involved. All of them are negotiable, except the bit where the Cannon stays a cannon.',
+      packages: [   // TODO pricing + inclusions
+        { cls: 'card--orange', tag: 'One only', name: 'Title partner', price: 'Let’s talk', unit: '', sticker: 'Presented by',
+          copy: '“The Karoo Crawl, presented by you.” Your name on everything, including the hundred people’s new favourite memory.',
+          items: ['Name in the event title', 'Logo on the start/finish, bibs and site', 'Brand presence at Place of Dreams all weekend', 'Film photo + content package'],
+          cta: ['#enquire', 'Enquire'] },
+        { cls: 'card--navy', tag: 'Two available', name: 'Aid station partner', price: 'Let’s talk', unit: '',
+          copy: 'Take over the Cannon or the Party Bus. Every runner passes it every lap. That’s a lot of laps.',
+          items: ['Naming rights: “The Party Bus by you”', 'Your product, handed out every lap', 'Station dressing, flags, music (bus only)', 'Feature on the route map and site'],
+          cta: ['#enquire', 'Enquire'] },
+        { cls: 'card--paper', tag: 'In kind', name: 'Product partner', price: 'Bring stuff', unit: '',
+          copy: 'Fuel, drinks, kit, coffee, sunscreen, things that go on a braai. If runners need it at 05:55 or 18:00, we want to hear from you.',
+          items: ['Product in the runner pack', 'Sampling at the aid stations', 'Logo on the partners page', 'Our eternal, slightly dehydrated gratitude'],
+          cta: ['#enquire', 'Enquire'] }
+      ],
+      factsTitle: ['The numbers'],
+      facts: [
+        ['Runners', '100, capped'],
+        ['Crew + plus-ones', 'On top of the hundred'],
+        ['Where', 'Place of Dreams, Tankwa Karoo (R356, ~50 min past Ceres)'],
+        ['When', 'August 2027, date TBC'],
+        ['Format', 'Lapped valley loop. No set distance. Run further than you ever have.'],
+        ['Aid', 'The Cannon + the Party Bus, every lap']
+      ],
+      enquireTitle: ['Become a partner'],
+      enquireLede: 'Tell us who you are and which bit of the valley you want. We’ll send the deck, and then we’ll talk about the deck, and then someone will mention the braai.',
+      enquireUrl: 'mailto:hello@example.com?subject=Karoo%20Crawl%20partnership',   // TODO real partnerships address
+      enquireLabel: 'Email us about partnering',
+      cta: { photo: 'assets/img/road-dance.jpg', eyebrow: 'Or just come run it', title: ['A hundred places.', 'Don’t be a sponsor.', 'Be a statistic.'],
+        links: [['tickets.html', 'Get your tickets'], ['about.html', 'About the Crawl']] }
     }
   },
 
@@ -216,7 +258,7 @@ window.CONTENT = {
     title: 'Karoo Crawl',
     blurb: 'Run further than you ever have, in a valley at Place of Dreams in the Tankwa Karoo. A hundred places. Organised by people who should not be trusted with a clipboard.',
     groups: [
-      ['The Crawl', [['index.html', 'Home'], ['about.html', 'About'], ['tickets.html', 'Tickets']]],
+      ['The Crawl', [['index.html', 'Home'], ['about.html', 'About'], ['tickets.html', 'Tickets'], ['partners.html', 'Partners']]],
       ['Out there', [['https://placeofdreams.co.za/', 'Place of Dreams ↗']]]
     ],
     big: 'See you at the Party Bus.',

@@ -88,7 +88,7 @@
   /* ---- list templates ---- */
   const TPL = {
     photos: a => a.map(([src, alt]) => `<img src="${src}" alt="${t(alt)}">`).join(''),
-    cards: a => a.map(c => `<div class="card card--${c.colour}"><div class="card__icon">${c.icon}</div><div><div class="card__grade">${c.grade}</div><h4>${t(c.title)}</h4><p>${t(c.text)}</p></div></div>`).join(''),
+    cards: a => a.map(c => `<div class="card card--${c.colour}"><div class="card__icon">${c.icon}</div><div><div class="card__grade${String(c.grade).length > 3 ? ' card__grade--word' : ''}">${t(c.grade)}</div><h4>${t(c.title)}</h4><p>${t(c.text)}</p></div></div>`).join(''),
     marquee: a => { const s = a.map(x => `<span>${t(x)}</span>`).join(''); return s + s; },
     rules: a => a.map(([h, p], i) => `<div data-reveal${i ? ` data-delay=".${i}"` : ''}><b>${pad(i + 1)}</b><h3 class="h-s">${t(h)}</h3><p class="lede mt-s" style="font-size:16px">${t(p)}</p></div>`).join(''),
     golden: a => a.map(([h, p], i) => `<div data-reveal${i ? ` data-delay=".${pad(i * 8)}"` : ''}><b>${pad(i + 1)}</b><h4>${t(h)}</h4><p>${t(p)}</p></div>`).join(''),
@@ -125,7 +125,7 @@
   /* ---- bind ---- */
   document.title = t(C.site.title);
   const md = document.querySelector('meta[name="description"]'); if (md) md.content = t(C.site.description);
-  const ic = document.querySelector('link[rel="icon"]'); if (ic) ic.href = C.runner.image;
+  const ic = document.querySelector('link[rel="icon"]'); if (ic) ic.href = C.site.favicon || C.site.logo || C.runner.image;
   document.querySelectorAll('[data-c]').forEach(el => { el.innerHTML = t(get(el.dataset.c)); });
   document.querySelectorAll('[data-c-lines]').forEach(el => { el.innerHTML = lines(get(el.dataset.cLines)); });
   document.querySelectorAll('[data-c-attr]').forEach(el => el.dataset.cAttr.split(';').forEach(p => { const [a, k] = p.split(':'); el.setAttribute(a, t(get(k))); }));

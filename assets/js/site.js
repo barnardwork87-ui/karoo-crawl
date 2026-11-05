@@ -7,6 +7,8 @@
   const NS = 'http://www.w3.org/2000/svg';
   const page = document.body.dataset.page || 'home';
   const CT = window.CONTENT, H = window.C, RUN = CT.runner;
+  const LOGO = CT.site.logo || null;                      // wordmark mode: logo replaces the runner illustration
+  const MARK = LOGO || RUN.image;
   gsap.registerPlugin(ScrollTrigger);
 
   /* ---------------- nav ---------------- */
@@ -22,8 +24,9 @@
   nav.className = 'nav';
   nav.innerHTML = `
     <a class="nav__logo" href="index.html" aria-label="Crew HQ home">
-      <span class="nav__barney"><img src="${RUN.image}" alt="${RUN.imageAlt || RUN.name}"></span>
-      <span>${H.t(CT.site.navTitle)}<small>${H.t(CT.site.navSub)}</small></span>
+      ${LOGO ? `<span class="nav__barney nav__mark"><img src="${LOGO}" alt="${H.t(CT.site.logoAlt || CT.race.name)}"></span>
+      <span><small>${H.t(CT.site.navSub)}</small></span>` : `<span class="nav__barney"><img src="${RUN.image}" alt="${RUN.imageAlt || RUN.name}"></span>
+      <span>${H.t(CT.site.navTitle)}<small>${H.t(CT.site.navSub)}</small></span>`}
     </a>
     <nav class="nav__links">${LINKS.map(([h, l, k]) => `<a href="${h}" class="${k === page ? 'is-active' : ''}">${l}</a>`).join('')}</nav>
     <a class="nav__cta" href="${NAVCTA}"><span>${H.t(CT.site.countdownLabel)}</span><b data-countdown>—</b></a>
@@ -176,7 +179,7 @@
     const L = document.createElement('div');
     L.className = 'loader';
     L.innerHTML = `<svg class="loader__topo"></svg>
-      <div class="loader__stage"><img class="loader__barney" src="${RUN.image}" alt=""></div>
+      <div class="loader__stage${LOGO ? ' loader__stage--logo' : ''}"><img class="loader__barney" src="${MARK}" alt=""></div>
       <div class="loader__count"><span>0</span><small>${(CT.loader && CT.loader.unit) || '/ ' + TOTAL + ' km'}</small></div>
       <div class="loader__msg">${MSGS[0]}</div><div class="loader__bar"></div>`;
     document.body.appendChild(L);
@@ -205,13 +208,13 @@
         const a = barney.getBoundingClientRect();
         const b = navImg.getBoundingClientRect();
         const f = document.createElement('img');
-        f.src = RUN.image; f.className = 'flyer';
+        f.src = MARK; f.className = 'flyer';
         Object.assign(f.style, { left: a.left + 'px', top: a.top + 'px', width: a.width + 'px', height: a.height + 'px' });
         document.body.appendChild(f);
         barney.style.opacity = 0;
         gsap.to(f, { left: b.left, top: b.top, width: b.width, height: b.height, duration: 1.05, ease: 'power3.inOut',
           onComplete: () => { navImg.style.opacity = 1; f.remove(); } });
-        gsap.to(f, { rotate: 360, duration: 1.05, ease: 'power2.inOut' });
+        if (!LOGO) gsap.to(f, { rotate: 360, duration: 1.05, ease: 'power2.inOut' });
         gsap.to(L, { yPercent: -100, duration: 1, ease: 'power3.inOut', delay: 0.3, onComplete: () => { L.remove(); if (lenis) lenis.start(); } });
         gsap.delayedCall(0.55, done);
       }, 3.15);
