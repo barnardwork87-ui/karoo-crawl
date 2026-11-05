@@ -528,3 +528,13 @@ html,body{overflow-x:clip}
 .nav__logo:hover .nav__mark img{transform:rotate(-3deg) scale(1.04)}
 .loader__stage--logo{width:min(78vw,640px);aspect-ratio:1472/343}
 .card__grade--word{font-size:clamp(46px,7vh,76px)!important;line-height:.9;letter-spacing:-.05em}
+/* hero side panel with a wordmark: sit above the stats row and grow upwards, never into it */
+@media (min-width:821px){
+  .hero__side:has(.hero__mark){top:auto;bottom:calc(clamp(36px,6vh,72px) + 86px);width:min(360px,30vw)}
+}
+.hero__side .hero__mark{display:block;width:100%;max-width:300px;margin:0 0 14px}
+.hero__side:has(.hero__mark) .eyebrow{margin-bottom:8px}
+@media (max-width:820px){
+  .hero__side .hero__mark{display:none}
+  .hero__side{right:var(--pad)}
+}
