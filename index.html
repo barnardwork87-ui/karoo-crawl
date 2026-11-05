@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Karoo Crawl</title>
+<meta name="description" content="">
+<link rel="icon" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css?v=1">
+</head>
+<body data-page="home">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero__pin">
+    <svg class="topo hero__map" id="heroTopo"></svg>
+    <div class="hero__vline" style="left:66.6%"></div>
+    <span class="plus" style="left:calc(66.6% - 6px);top:58%"></span>
+    <span class="hero__km" id="heroKm">km 0</span>
+    <div class="hero__side" data-hero-side>
+      <img class="hero__mark" src="assets/karoo-crawl-logo.svg" alt="Karoo Crawl">
+      <span class="eyebrow" data-c="pages.home.hero.eyebrow"></span>
+      <span data-c="pages.home.hero.side"></span>
+    </div>
+    <h1 class="hero__title h-xxl" data-hero-title data-c-lines="pages.home.hero.title"></h1>
+    <div class="hero__meta" data-hero-meta data-c-tpl="heroMeta"></div>
+    <div class="hero__scroll" data-c="pages.home.hero.scroll"></div>
+  </div>
+</section>
+
+<!-- ============ STATEMENT ============ -->
+<section class="banner">
+  <div class="vgrid"><i style="left:16.6%"></i><i style="left:50%"></i><i style="left:83.3%"></i></div>
+  <div class="wrap">
+    <p class="eyebrow" data-reveal data-c="pages.home.statement.eyebrow"></p>
+    <h2 class="h-l mt-m" id="statement" data-c="pages.home.statement.text"></h2>
+    <div class="banner__photos" data-reveal data-c-tpl="photos" data-c-src="pages.home.statement.photos"></div>
+  </div>
+</section>
+
+<!-- ============ FLY-DOWN (3D) ============ -->
+<section class="fly" id="fly">
+  <div class="fly__stage">
+    <canvas></canvas>
+    <div class="fly__vig"></div>
+    <div class="fly__hud">
+      <p class="eyebrow" data-c="pages.home.fly.eyebrow"></p>
+      <div class="fly__alt"><span data-fly-lbl>Altitude</span><b data-fly-km>—</b></div>
+    </div>
+    <div class="fly__caps" data-c-tpl="flycaps" data-c-src="pages.home.fly.caps"></div>
+  </div>
+</section>
+
+<!-- ============ REPORT CARD ============ -->
+<section class="report" id="report">
+  <div class="report__pin">
+    <svg class="topo faint" id="reportTopo"></svg>
+    <span class="plus" style="left:12%;top:30%"></span><span class="plus" style="right:12%;top:30%"></span>
+    <span class="plus" style="left:12%;bottom:12%"></span><span class="plus" style="right:12%;bottom:12%"></span>
+    <div class="report__head">
+      <p class="eyebrow" data-c="pages.home.report.eyebrow"></p>
+      <h2 class="h-xl" data-c="pages.home.report.title"></h2>
+    </div>
+    <div class="report__deck" id="deck" data-c-tpl="cards" data-c-src="pages.home.report.cards"></div>
+    <div class="report__final" id="stamp">
+      <div class="stamp"><span data-c="pages.home.report.stamp"></span><small data-c="pages.home.report.stampSmall"></small></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTE ============ -->
+<section class="route" id="route">
+  <div class="wrap">
+    <div class="route__head">
+      <div>
+        <p class="eyebrow" data-reveal data-c="pages.home.route.eyebrow"></p>
+        <h2 class="h-xl mt-s" data-lines data-c-lines="pages.home.route.title"></h2>
+      </div>
+      <p class="lede" data-reveal data-c="pages.home.route.lede"></p>
+    </div>
+  </div>
+  <div class="route__stage">
+    <div class="route__mapbox">
+      <svg class="route__map" id="routeMap"></svg>
+      <div class="maplegend"><span><i class="r"></i>Route (indicative)</span><span><i class="o"></i>The Van / base</span></div>
+    </div>
+    <div class="route__panel">
+      <div class="leginfo" id="legInfo"></div>
+      <div class="profile">
+        <p class="eyebrow" style="margin-bottom:8px">Elevation · hover to scrub</p>
+        <svg id="profile" viewBox="0 0 1000 150" preserveAspectRatio="none"></svg>
+        <div class="profile__axis" id="profAxis"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee__in" data-c-tpl="marquee" data-c-src="pages.home.marquee"></div></div>
+
+<section class="cta" data-c-cta="pages.home.cta"></section>
+
+<footer class="foot" id="foot"></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="assets/terrain.js?v=1"></script>
+<script src="content/race.js?v=1"></script>
+<script src="assets/js/content.js?v=1"></script>
+<script src="assets/js/model.js?v=1"></script>
+<script src="assets/js/site.js?v=1"></script>
+<script src="assets/js/footer.js?v=1"></script>
+<script src="assets/js/home.js?v=1"></script>
+<script type="module" src="assets/js/flydown.js?v=1"></script>
+</body>
+</html>
