@@ -5,6 +5,7 @@
   const { buildTopo, prepDraw, routeDraw, RM } = window.SITE;
   const NS = 'http://www.w3.org/2000/svg';
   const D = R.distance;
+  const SHOWD = CT.race.showDistance !== false;          // false: never show km anywhere
   const schedGoal = R.schedule(R.goal);
   const shortLabel = s => s.label.replace(' (timing)', '').replace(/ ·.*/, '');
 
@@ -36,7 +37,7 @@
     const km = T.routeKm[idx];
     const st = R.stations.filter(s => s.km <= km + 0.2).pop();
     kmTag.style.opacity = p < 0.004 ? 0 : 1;
-    kmTag.textContent = p < 0.01 ? t(HC.hero.startTag) : p > 0.995 ? t(HC.hero.finishTag) : `km ${km.toFixed(1)} · past ${shortLabel(st)}`;
+    kmTag.textContent = p < 0.01 ? t(HC.hero.startTag) : p > 0.995 ? t(HC.hero.finishTag) : SHOWD ? `km ${km.toFixed(1)} · past ${shortLabel(st)}` : `past ${shortLabel(st)}`;
   }
   placeRunner(0);
 
@@ -171,7 +172,8 @@
   ph += `<line class="cur" id="profCur" x1="-10" x2="-10" y1="0" y2="${PH}"/>`;
   prof.innerHTML = ph;
   const ax = document.getElementById('profAxis');
-  if (ax) { const q = f => Math.round(D * f / 5) * 5; ax.innerHTML = `<span>0 km</span><span>${q(.25)}</span><span>${q(.5)}</span><span>${q(.75)}</span><span>${D} km</span>`; }
+  if (ax && SHOWD) { const q = f => Math.round(D * f / 5) * 5; ax.innerHTML = `<span>0 km</span><span>${q(.25)}</span><span>${q(.5)}</span><span>${q(.75)}</span><span>${D} km</span>`; }
+  else if (ax) ax.innerHTML = ST.filter(s => s.kind !== 'timing').map(s => `<span>${shortLabel(s)}</span>`).join('');
 
   const info = document.getElementById('legInfo');
   const tip = document.createElement('div'); tip.className = 'tip'; document.body.appendChild(tip);
@@ -180,7 +182,7 @@
     info.innerHTML = `<div class="leginfo__kicker"><span class="eyebrow">Full course</span><span class="leginfo__crew yes">${crewStops} ${t(CT.race.stopsLabel || 'crew stops')} + start/finish</span></div>
       <h3 class="h-l">${matchMedia('(hover: none)').matches ? 'Tap' : 'Hover'} a section</h3><div class="leginfo__where">${t(HC.route.overviewWhere)}</div>
       <p class="leginfo__blurb">${t(HC.route.overviewBlurb)}</p>
-      <div class="leginfo__stats"><div><span class="eyebrow">Dist</span><b>${D} km</b></div><div><span class="eyebrow">Up</span><b>${t('{climb}')} m</b></div><div><span class="eyebrow">Goal</span><b>${R.goal}h</b></div><div><span class="eyebrow">Cut-off</span><b>${CT.race.cutoffHours}h</b></div></div>`;
+      <div class="leginfo__stats">${(CT.race.overviewStats || [['Dist', D + ' km'], ['Up', t('{climb}') + ' m'], ['Goal', R.goal + 'h'], ['Cut-off', CT.race.cutoffHours + 'h']]).map(([l, v]) => `<div><span class="eyebrow">${t(l)}</span><b>${t(v)}</b></div>`).join('')}</div>`;
   }
   function showLeg(i) {
     const s = ST[i], a = ST[i - 1], L = s.leg || { title: s.label, where: '', blurb: '' }, sc = schedGoal[i];
@@ -188,10 +190,10 @@
     map.querySelectorAll('.leg').forEach(p => p.classList.toggle('on', +p.dataset.leg === i));
     prof.querySelectorAll('.band').forEach(b => b.classList.toggle('on', +b.dataset.leg === i));
     const crewTxt = s.crew ? `${t(CT.race.crewAt || 'Crew at')} ${s.label.replace(/ ·.*/, '')}` : s.kind === 'timing' ? 'Timing point · no crew' : `No crew · ${t(CT.race.penalty)}`;
-    info.innerHTML = `<div class="leginfo__kicker"><span class="eyebrow">Leg ${String(i).padStart(2, '0')} · km ${a.km.toFixed(1)} → ${s.km.toFixed(1)}</span><span class="leginfo__crew ${s.crew ? 'yes' : ''}">${crewTxt}</span></div>
+    info.innerHTML = `<div class="leginfo__kicker"><span class="eyebrow">Leg ${String(i).padStart(2, '0')}${SHOWD ? ` · km ${a.km.toFixed(1)} → ${s.km.toFixed(1)}` : ` of ${String(ST.length - 1).padStart(2, '0')}`}</span><span class="leginfo__crew ${s.crew ? 'yes' : ''}">${crewTxt}</span></div>
       <h3 class="h-l">${t(L.title)}</h3><div class="leginfo__where">${t(L.where)}</div>
       <p class="leginfo__blurb">${t(L.blurb)}</p>
-      <div class="leginfo__stats"><div><span class="eyebrow">Dist</span><b>${s.segkm.toFixed(1)} km</b></div><div><span class="eyebrow">Up</span><b>+${s.up} m</b></div><div><span class="eyebrow">Down</span><b>−${s.down} m</b></div><div><span class="eyebrow">${t(CT.race.etaLabel || 'ETA @{goal}h')}</span><b>${R.clock(sc.arrive).slice(4)}</b></div></div>`;
+      <div class="leginfo__stats">${SHOWD ? `<div><span class="eyebrow">Dist</span><b>${s.segkm.toFixed(1)} km</b></div>` : `<div><span class="eyebrow">From</span><b>${shortLabel(a)}</b></div>`}<div><span class="eyebrow">Up</span><b>+${s.up} m</b></div><div><span class="eyebrow">Down</span><b>−${s.down} m</b></div>${SHOWD ? `<div><span class="eyebrow">${t(CT.race.etaLabel || 'ETA @{goal}h')}</span><b>${R.clock(sc.arrive).slice(4)}</b></div>` : `<div><span class="eyebrow">To</span><b>${shortLabel(s)}</b></div>`}</div>`;
     return s;
   }
   function clearLeg() {
@@ -212,7 +214,7 @@
     if (i !== cur) { cur = i; showLeg(i); }
     const s = ST[i];
     const lg = s.leg || { title: s.label, where: '' };
-    tip.innerHTML = `<span class="mono">km ${ST[i - 1].km.toFixed(1)}–${s.km.toFixed(1)} · +${s.up} m</span><b>${t(lg.title)}</b>${t(lg.where)}`;
+    tip.innerHTML = `<span class="mono">${SHOWD ? `km ${ST[i - 1].km.toFixed(1)}–${s.km.toFixed(1)} · ` : ''}+${s.up} m</span><b>${t(lg.title)}</b>${t(lg.where)}`;
     tip.style.left = Math.min(innerWidth - 300, e.clientX + 16) + 'px'; tip.style.top = (e.clientY + 18) + 'px';
     tip.classList.add('on');
   });

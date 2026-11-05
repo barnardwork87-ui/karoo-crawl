@@ -14,7 +14,7 @@ else if (sec) sec.style.display = 'none';
 
 function start() {
   const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const cfg = Object.assign({ exaggeration: 1.8, startKm: 1.2, lookKm: 4, runLookKm: 1, eye: 6, runKm: 2.5 }, CT.fly || {});
+  const cfg = Object.assign({ exaggeration: 1.8, startKm: 1.2, lookKm: 4, runLookKm: 1, eye: 6, runKm: 2.5, back: 70, lookHeight: null, endFov: 58, fog: [0.25, 0.95] }, CT.fly || {});
   const D = T.dem;
   const stage = sec.querySelector('.fly__stage');
   const canvas = sec.querySelector('canvas');
@@ -129,7 +129,10 @@ function start() {
   const eye = cfg.eye * EX;                              // standing height (metres, exaggerated like the terrain)
   const A = routeAt(cfg.startKm), B = routeAt(cfg.startKm + cfg.lookKm);
   const dir = new THREE.Vector3().subVectors(B, A).setY(0).normalize();
-  const ground = A.clone().addScaledVector(dir, -6).setY(yAt(A.x - dir.x * 6, A.z - dir.z * 6) + eye);
+  const backU = cfg.back / D.mPerUnit;                  // how far behind the start you stand (m → units)
+  const gx = A.x - dir.x * backU, gz = A.z - dir.z * backU;
+  const ground = new THREE.Vector3(gx, yAt(gx, gz) + eye, gz);
+  const lookY = cfg.lookHeight == null ? eye * 0.6 : cfg.lookHeight * EX;
   // waypoints: top-down → high oblique → low over the start → standing
   const P = [
     new THREE.Vector3(centre.x, span * 1.9, centre.z + 0.01),
@@ -137,14 +140,15 @@ function start() {
     A.clone().addScaledVector(dir, -span * 0.18).setY(A.y + span * 0.22),
     ground
   ];
-  const L = [centre.clone(), centre.clone().lerp(A, 0.5), A.clone().addScaledVector(dir, span * 0.05), B.clone().setY(B.y + eye * 0.6)];
+  const L = [centre.clone(), centre.clone().lerp(A, 0.5), A.clone().addScaledVector(dir, span * 0.05), B.clone().setY(B.y + lookY)];
   const pathP = new THREE.CatmullRomCurve3(P, false, 'centripetal'), pathL = new THREE.CatmullRomCurve3(L, false, 'centripetal');
   const upTop = new THREE.Vector3(0, 0, -1), upY = new THREE.Vector3(0, 1, 0), up = new THREE.Vector3();
   const ease = t => t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
   const state = { p: 0, draw: 0 };
   function place() {
-    const p = state.p, fly = Math.min(1, p / 0.8), run = Math.max(0, (p - 0.8) / 0.2);
+    const RUN = cfg.runKm > 0 ? 0.2 : 0;                   // share of the scroll spent jogging along the route
+    const p = state.p, fly = Math.min(1, p / (1 - RUN)), run = RUN ? Math.max(0, (p - 1 + RUN) / RUN) : 0;
     const t = ease(fly);
     const cp = pathP.getPoint(t), cl = pathL.getPoint(t);
     if (run > 0) {                                       // last stretch: jog along the route
@@ -157,12 +161,12 @@ function start() {
     cam.position.copy(cp);
     up.copy(upTop).lerp(upY, Math.min(1, t * 1.6)).normalize();
     cam.up.copy(up); cam.lookAt(cl);
-    cam.fov = 32 + 26 * t; cam.updateProjectionMatrix();
+    cam.fov = 32 + (cfg.endFov - 32) * t; cam.updateProjectionMatrix();
     terrainMat.uniforms.uCam.value.copy(cam.position);
-    terrainMat.uniforms.uFog.value.set(THREE.MathUtils.lerp(span * 3, span * 0.25, t), THREE.MathUtils.lerp(span * 6, span * 0.95, t));
+    terrainMat.uniforms.uFog.value.set(THREE.MathUtils.lerp(span * 3, span * cfg.fog[0], t), THREE.MathUtils.lerp(span * 6, span * cfg.fog[1], t));
     terrainMat.uniforms.uWire.value = t;
     routeMat.uniforms.uDraw.value = state.draw;
-    const g = THREE.MathUtils.smoothstep(t, 0.55, 0.85);
+    const g = cfg.groundLine === false ? 0 : THREE.MathUtils.smoothstep(t, 0.55, 0.85);
     routeMat.uniforms.uA.value = 1 - g; groundMat.uniforms.uA.value = g;
   }
 
@@ -194,8 +198,9 @@ function start() {
       const a = i / n, b = (i + 1) / n;
       c.classList.toggle('on', state.p >= a - 0.001 && (state.p < b || i === n - 1));
     });
-    if (altLbl) altLbl.textContent = state.p < 0.8 ? 'Altitude' : 'On the route';
-    if (kmEl) kmEl.textContent = state.p < 0.8 ? `${Math.round(cam.position.y * D.mPerUnit / cfg.exaggeration + D.min).toLocaleString('en')} m` : `km ${(cfg.startKm + Math.max(0, (state.p - 0.8) / 0.2) * cfg.runKm).toFixed(1)}`;
+    const showD = CT.race.showDistance !== false && cfg.runKm > 0;
+    if (altLbl) altLbl.textContent = state.p < 0.8 || !showD ? 'Altitude' : 'On the route';
+    if (kmEl) kmEl.textContent = state.p < 0.8 || !showD ? `${Math.round(cam.position.y * D.mPerUnit / cfg.exaggeration + D.min).toLocaleString('en')} m` : `km ${(cfg.startKm + Math.max(0, (state.p - 0.8) / 0.2) * cfg.runKm).toFixed(1)}`;
   }
   if (RM || !window.ScrollTrigger) { state.p = 0; state.draw = 1; render(); captions(); return; }
   gsap.timeline({ scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 0.8 } })

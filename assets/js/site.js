@@ -177,7 +177,7 @@
     L.className = 'loader';
     L.innerHTML = `<svg class="loader__topo"></svg>
       <div class="loader__stage"><img class="loader__barney" src="${RUN.image}" alt=""></div>
-      <div class="loader__count"><span>0</span><small>/ ${TOTAL} km</small></div>
+      <div class="loader__count"><span>0</span><small>${(CT.loader && CT.loader.unit) || '/ ' + TOTAL + ' km'}</small></div>
       <div class="loader__msg">${MSGS[0]}</div><div class="loader__bar"></div>`;
     document.body.appendChild(L);
     if (lenis) lenis.stop();
