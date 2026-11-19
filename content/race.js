@@ -12,18 +12,25 @@
    The spot, the date and the route are all still open. Keep general copy vague
    about all three.
 
-   DO NOT EDIT - these feed the Home map and 3D fly-down, which is built around
-   them:
+   NO MAP ON THE SITE ANY MORE. Both map sections have been taken off the home
+   page: the lower route/elevation block first, then the 3D fly-down. Nothing
+   now renders a route, a contour route line, an elevation profile or the
+   Place of Dreams / Cannon / Party Bus markers.
+
+   These keys are therefore UNUSED. They are kept, intact, so either section
+   can be put back by restoring its markup - do not prune them, and do not
+   bother rewriting the copy inside them:
+     stations[]        (mapLabel, flyLabel, leg tooltips)
+     fly{}             (camera path for the fly-down)
+     pages.home.fly    (fly-down captions)
+     pages.home.route  (route map + elevation copy)
+
+   Still LIVE and still feeding things, so edit with care:
      race.distanceKm / climbM / goalHours / survivalHours / cutoffHours
      race.overviewStats / crewAt / penalty / stopsLabel
-     stations[]  (mapLabel, flyLabel and the leg tooltips)
-     fly{}  .  pages.home.fly
-   They still name Place of Dreams, the Cannon and the Party Bus. That is
-   deliberate: the fly-down is an indicative visualisation, and the surrounding
-   page copy is what carries the real, still-undecided story.
-
-   pages.home.route is now UNUSED - the lower route/elevation section was taken
-   off the home page. Kept here in case it is ever put back.
+       - read by model.js and the stats/chart block
+     terrain.js is still needed: the hero, report and loader topo artwork are
+       drawn from it even though the route line is gone.
 ===================================================================== */
 window.CONTENT = {
 
