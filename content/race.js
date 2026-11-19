@@ -108,6 +108,8 @@ window.CONTENT = {
     home: {
       hero: {
         eyebrow: 'Somewhere in the Karoo · 100 places',
+        // UNUSED - the statement block below the hero makes this same point,
+        // so the hero now carries the wordmark and the eyebrow only.
         side: 'A place to push yourself, somewhere in the Karoo. Everyone starts together in the dark on a route you can repeat, then picks their own distance and their own pace. Run as far as you can. Stop whenever you like. Everyone’s done by sunset, and then the fun starts.',
         title: ['Run further', 'than you', 'ever have.', '*On purpose.'],
         meta: [['When', 'Winter'], ['Distance', 'Yours'], ['Done by', 'Sunset'], ['Runners', '100']],
@@ -136,7 +138,7 @@ window.CONTENT = {
         ]
       },
       report: {
-        eyebrow: '02 · The event',
+        eyebrow: '01 · The event',
         title: 'Everything you need to know. It isn’t much.',
         // big value + title + text, shuffled in like a deck as you scroll
         cards: [
@@ -158,8 +160,8 @@ window.CONTENT = {
         overviewBlurb: 'Out through one valley, back through the next. Gentle, then very much not gentle, then downhill. Every lap you pass the start, which has a chair, which is the most dangerous object in ultrarunning.'
       },
       marquee: ['Run further than you ever have', 'Your distance', 'Start together', 'Done by sunset', 'Pitch a tent', 'Rave with whatever’s left'],
-      cta: { photo: 'assets/img/sunrise-crew.jpg', eyebrow: '04 · Your move', title: ['A hundred runners.', 'Put your hand up.'],
-        links: [['https://tally.so/r/o9RgbO', 'Register interest'], ['about.html', 'What is this, exactly']] }
+      cta: { photo: 'assets/img/sunrise-crew.jpg', eyebrow: '02 · Your move', title: ['A hundred runners.', 'Put your hand up.'],
+        links: [['https://tally.so/r/o9RgbO', 'Register interest'], ['about.html', 'Learn more about the Crawl']] }
     },
 
     about: {
@@ -189,7 +191,7 @@ window.CONTENT = {
         ['Arrive', 'Drive in, pitch a tent, probably in the dark. Meet the people you will later be overtaken by. Go to bed far too late.'],
         ['Morning', 'Everyone starts together. Headtorches, cold hands, the group photo where nobody has suffered yet.'],
         ['All day', 'Laps, at your pace, for as long as you want them. Stop for a chair and a snack. Go again, or don’t.'],
-        ['Sunset', 'Running stops. Fire, food, music and a speaker with a bit of life left in it. Rave with whatever’s left in the tank.']
+        ['Sunset', 'Running stops. Fire, food, a DJ line-up and a speaker with a bit of life left in it. Rave with whatever’s left in the tank.']
       ],
       galleryTitle: ['This isn’t our', 'first bad idea.'],
       galleryLede: 'Archive shots on 35 mm by Justin from a previous Crawl, who has no further notes. Everything here happened. Some of it was on purpose. None of it is the confirmed spot for this one — treat it as the general idea.',
@@ -243,7 +245,7 @@ window.CONTENT = {
         ['After', 'Camping, a fire, music and a party.']
       ],
       enquireTitle: ['Become a Founding Partner'],
-      enquireLede: 'Help us get the first Crawl off the ground and we’ll always credit you as a Founding Partner. Even if you never sponsor another edition, you’ll still be one of the original brands that made it happen. Tell us what you can bring and we’ll take it from there.',
+      enquireLede: 'Help us get the first Crawl off the ground and you’re a Founding Partner for good. Not just this one. Every edition after it carries the people who made the first one possible — on the site, on the start line, in the programme, wherever the Crawl’s name ends up. You never have to sponsor again to keep it. Tell us what you can bring and we’ll take it from there.',
       // Kept for reference: the Founding Partner block no longer carries its own
       // button, so the page has exactly one way through to the form.
       enquireUrl: 'https://tally.so/r/o9RgbO',
