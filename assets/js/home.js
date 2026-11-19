@@ -63,7 +63,12 @@
   /* ---------------- STATEMENT: word-by-word ---------------- */
   if (document.getElementById('statement')) {
   const st = document.getElementById('statement');
-  st.innerHTML = st.textContent.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
+  // The copy arrives as blocks, so split words inside each one rather than
+  // flattening the whole thing — otherwise the line breaks are lost.
+  const says = st.querySelectorAll('.say');
+  (says.length ? says : [st]).forEach(b => {
+    b.innerHTML = b.textContent.split(' ').map(w => `<span class="w">${w}</span>`).join(' ');
+  });
   gsap.to(st.querySelectorAll('.w'), { opacity: 1, stagger: 0.05, ease: 'none',
     scrollTrigger: { trigger: st, start: 'top 80%', end: 'bottom 45%', scrub: true } });
 

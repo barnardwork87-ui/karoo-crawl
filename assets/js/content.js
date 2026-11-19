@@ -87,6 +87,9 @@
 
   /* ---- list templates ---- */
   const TPL = {
+    // statement: blocks of copy that keep their breaks. home.js splits the
+    // words inside each one for the scroll reveal.
+    statement: a => [].concat(a).map(b => `<span class="say">${t(b)}</span>`).join(''),
     photos: a => a.map(([src, alt]) => `<img src="${src}" alt="${t(alt)}">`).join(''),
     cards: a => a.map(c => `<div class="card card--${c.colour}"><div class="card__icon">${c.icon}</div><div><div class="card__grade${String(c.grade).length > 3 ? ' card__grade--word' : ''}">${t(c.grade)}</div><h4>${t(c.title)}</h4><p>${t(c.text)}</p></div></div>`).join(''),
     marquee: a => { const s = a.map(x => `<span>${t(x)}</span>`).join(''); return s + s; },

@@ -3,28 +3,50 @@
    The only file to edit. See the template README for tokens and build steps.
    TBC items are marked  // TODO  so they're easy to find.
 
-   The idea: there is no set distance. One valley loop from Place of Dreams,
-   aid at the Cannon and the Party Bus. You run until you've gone further
-   than you ever have. 100 places.
+   The idea: a run and a campout with a party on the end of it. Everyone starts
+   together in the morning on a route you can repeat, then picks their own
+   distance and pace. Beating your longest run is a challenge you can set
+   yourself, not a condition of anything. Everyone is done by sunset. 100
+   runners is the current target; crew and hangers-on sit on top of that.
+
+   The spot, the date and the route are all still open. Keep general copy vague
+   about all three.
+
+   DO NOT EDIT - these feed the Home map and 3D fly-down, which is built around
+   them:
+     race.distanceKm / climbM / goalHours / survivalHours / cutoffHours
+     race.overviewStats / crewAt / penalty / stopsLabel
+     stations[]  (mapLabel, flyLabel and the leg tooltips)
+     fly{}  .  pages.home.fly
+   They still name Place of Dreams, the Cannon and the Party Bus. That is
+   deliberate: the fly-down is an indicative visualisation, and the surrounding
+   page copy is what carries the real, still-undecided story.
+
+   pages.home.route is now UNUSED - the lower route/elevation section was taken
+   off the home page. Kept here in case it is ever put back.
 ===================================================================== */
 window.CONTENT = {
 
   site: {
     slug: 'karoo',
     title: 'Karoo Crawl · Run further than you ever have',
-    description: 'The Karoo Crawl at Place of Dreams, Tankwa Karoo. No set distance. One valley loop. Run until you’ve gone further than you ever have. 100 places.',
+    description: 'A running and camping weekend somewhere in the Karoo. Everyone starts together, everyone picks their own distance, everyone is done by sunset. Then there’s a fire.',
     logo: 'assets/karoo-crawl-logo.svg',   // wordmark in the nav + loader (no runner illustration)
     logoAlt: 'Karoo Crawl',
-    navSub: 'Place of Dreams · 100 places',
-    navCta: 'tickets.html',
-    countdownLabel: 'Next crawl in',
-    countdownDone: 'Crawling'
+    // Kept short: at 390px this sits beside the burger, and anything longer
+    // runs under it. The old 'Place of Dreams · 100 places' already did.
+    navSub: 'Middle of nowhere',
+    navCta: 'https://tally.so/r/o9RgbO',
+    // The nav pill is a call to action, not a clock. Small text carries the
+    // when, bold text carries the ask.
+    countdownLabel: 'Winter. Probably August.',
+    countdownDone: 'Crawling',
+    countdownStatic: 'Register interest'
   },
 
   nav: [
     ['index.html', 'Home', 'home'],
     ['about.html', 'About the Crawl', 'about'],
-    ['tickets.html', 'Get your tickets<span class="tag">100</span>', 'tickets'],
     ['partners.html', 'Partners', 'partners']
   ],
 
@@ -57,7 +79,7 @@ window.CONTENT = {
   loader: {
     count: 101,
     unit: '% of your longest run',
-    messages: ['Finding the R356', 'Locating the Cannon', 'Fuelling the Party Bus', 'Measuring the valley', 'Ignoring your PB', 'Charging headtorches', 'Losing signal', 'Crawling']
+    messages: ['Finding the gravel', 'Checking the long-range forecast', 'Ignoring your PB', 'Charging headtorches', 'Packing a speaker', 'Losing signal', 'Pitching a tent in the dark', 'Crawling']
   },
 
   /* Indicative valley loop. Real route + station spots TBC. */
@@ -78,18 +100,24 @@ window.CONTENT = {
   pages: {
     home: {
       hero: {
-        eyebrow: 'Place of Dreams · Tankwa Karoo · 100 places',
-        side: 'There’s no distance. That’s the point. One loop through a valley at Place of Dreams, an hour past Ceres. You run it until you’ve gone further than you ever have in your life. Then you stop, eat something from a fire, and tell everyone. That’s the whole event.',
+        eyebrow: 'Somewhere in the Karoo · 100 places',
+        side: 'A place to push yourself, somewhere in the Karoo. Everyone starts together in the dark on a route you can repeat, then picks their own distance and their own pace. Run as far as you can. Stop whenever you like. Everyone’s done by sunset, and then the fun starts.',
         title: ['Run further', 'than you', 'ever have.', '*On purpose.'],
-        meta: [['Start', 'Sat 05:55'], ['Distance', 'Further'], ['Places', '100'], ['Signal', 'None']],
+        meta: [['When', 'Winter'], ['Distance', 'Yours'], ['Done by', 'Sunset'], ['Runners', '100']],
         scroll: 'SCROLL ↓ TO START CRAWLING',
-        startTag: 'Place of Dreams · 05:55',
+        startTag: 'Somewhere in the Karoo',
         finishTag: 'Home. Again?'
       },
       statement: {
         eyebrow: 'The situation',
-        text: 'No finish distance. One valley. Two aid stations, one of which is a cannon and one of which is a bus having a party. A hundred people, each trying to beat the furthest they’ve ever run. Nobody is racing you. You are racing a number you made up years ago.',
-        photos: [['assets/img/start-group.jpg', 'The start, 05:50'], ['assets/img/sunrise-road.jpg', 'Sunrise'], ['assets/img/canyon.jpg', 'The valley'], ['assets/img/road-dance.jpg', 'Morale, briefly'], ['assets/img/braai.jpg', 'The finish line']]
+        // Three blocks, not one paragraph. The middle one is the whole point,
+        // so it gets a line to itself.
+        text: [
+          'Karoo Crawl is a place to push yourself. An early start, running under the stars, cut-off at sunset.',
+          'Nobody is racing you.',
+          'Run slow, run fast, just run as far as you can. Once the run is done, we start the fun. Call it a festival of running if you will.'
+        ],
+        photos: [['assets/img/start-group.jpg', 'The start, archive'], ['assets/img/sunrise-road.jpg', 'Sunrise'], ['assets/img/canyon.jpg', 'Big country'], ['assets/img/road-dance.jpg', 'Morale, briefly'], ['assets/img/braai.jpg', 'The real finish line']]
       },
       fly: {
         eyebrow: '01 · The view',
@@ -105,15 +133,15 @@ window.CONTENT = {
         title: 'Everything you need to know. It isn’t much.',
         // big value + title + text, shuffled in like a deck as you scroll
         cards: [
-          { colour: 'orange', icon: 'DST', grade: 'Further', title: 'The format', text: 'No set distance. One valley loop, as many laps as it takes to go further than you ever have. Your finish line is your old longest run, plus one step.' },
-          { colour: 'olive', icon: 'LOC', grade: 'Tankwa', title: 'Place of Dreams', text: 'Private wilderness in the Karoo Hoogland, about 50 minutes past Ceres on the R356. Stone pods, a canyon, a pool, no signal.' },
-          { colour: 'sky', icon: 'AID', grade: '2', title: 'Aid stations, every lap', text: 'The Cannon at the mouth of the valley and the Party Bus at the top of the climb. Water, Coke, food, and a sound system that isn’t on the cannon.' },
-          { colour: 'navy', icon: 'CAP', grade: '100', title: 'Places', text: 'A hundred runners. A hundred different finish lines. One valley, one braai.' },
-          { colour: 'lime', icon: 'GUN', grade: '05:55', title: 'Start', text: 'Headtorches on, in the dark, at Place of Dreams. Sunrise arrives somewhere around lap one.' },
-          { colour: 'paper', icon: 'END', grade: 'Braai', title: 'The finish', text: 'When you’ve gone further than ever, you stop. Then there is a fire, a pool and a lot of people lying about how many laps they did.' }
+          { colour: 'orange', icon: 'DST', grade: 'Yours', title: 'Your distance', text: 'No set distance and no set pace. This is only an ultra if you want it to be. Run slow, run fast, just run as far as you can — and if you want a target, the furthest you’ve ever run is sitting right there.' },
+          { colour: 'lime', icon: 'GUN', grade: 'Stars', title: 'One start', text: 'Everyone goes at once, early, running under the stars. It’s the only organised part of the day. It’s also the best photo you’ll take all weekend.' },
+          { colour: 'sky', icon: 'SUN', grade: 'Sunset', title: 'Done by dark', text: 'Call it whenever you like. One lap is a fine day out. Everyone stops by sunset. That’s not really a cut-off. That’s when the other thing starts.' },
+          { colour: 'navy', icon: 'KIT', grade: 'BYO', title: 'Bring your own', text: 'Tent, food, drinks, water and whatever you run on. Treat it as self-supported and pack like it. Anything past that is still being worked out.' },
+          { colour: 'olive', icon: 'CMP', grade: 'Tent', title: 'Camping', text: 'Arrive the day before, pitch in the dark, go to bed too late. Friends, crew and people with no intention of running are part of it, not an afterthought.' },
+          { colour: 'paper', icon: 'END', grade: 'Rave', title: 'Then the fun', text: 'Once the run is done we start the fun. A fire, a speaker with a bit of life left in it and a hundred people in various states of repair. Call it a festival of running if you will.' }
         ],
-        stamp: '100 PLACES',
-        stampSmall: 'One valley · No distance · Tickets soon'
+        stamp: '100 RUNNERS',
+        stampSmall: 'The target for now · Crew and hangers-on on top · Register interest'
       },
       route: {
         eyebrow: '03 · The loop (indicative)',
@@ -122,147 +150,111 @@ window.CONTENT = {
         overviewWhere: 'Indicative loop · Place of Dreams → the valley → the Cannon → over the top → the Party Bus → Place of Dreams → repeat',
         overviewBlurb: 'Out through one valley, back through the next. Gentle, then very much not gentle, then downhill. Every lap you pass the start, which has a chair, which is the most dangerous object in ultrarunning.'
       },
-      marquee: ['No distance', 'Further than ever', 'The Cannon', 'The Party Bus', '100 places', 'Braai at the end'],
-      cta: { photo: 'assets/img/sunrise-crew.jpg', eyebrow: '04 · Your move', title: ['A hundred places.', 'One valley. Get in.'],
-        links: [['tickets.html', 'Get your tickets'], ['about.html', 'What is this, exactly']] }
+      marquee: ['Run further than you ever have', 'Your distance', 'Start together', 'Done by sunset', 'Pitch a tent', 'Rave with whatever’s left'],
+      cta: { photo: 'assets/img/sunrise-crew.jpg', eyebrow: '04 · Your move', title: ['A hundred runners.', 'Put your hand up.'],
+        links: [['https://tally.so/r/o9RgbO', 'Register interest'], ['about.html', 'What is this, exactly']] }
     },
 
     about: {
       eyebrow: 'About the Karoo Crawl',
       title: ['Further than', 'you ever have.', '*That’s the pitch.'],
-      lede: 'The Karoo Crawl has one rule: go further than you’ve ever gone. If your longest run is 21 km, today it’s 22. If it’s 100, good luck, see you at the bus. Everyone’s finish line is different and every single one of them is in the same valley.',
+      lede: 'A run and a campout, somewhere in the Karoo, with a party on the end of it. Everyone starts together in the morning on a route you can repeat, then picks their own distance and their own pace. If you want a number to aim at, the furthest you’ve ever run is a good one. You don’t have to. One lap and a cold drink is a completely respectable weekend.',
       whatTitle: ['How it works'],
       what: [
-        ['There’s no distance', 'One valley loop from Place of Dreams. You run laps. You stop when you’ve beaten your longest run ever. That might be two laps. It might be eight. The valley does not care.'],
-        ['Aid every lap', 'The Cannon at the mouth of the valley, the Party Bus at the top. Water, Coke, food, encouragement of a kind. One of them plays music.'],
-        ['100 people', 'That’s the cap. A hundred people, a hundred different finish lines, one braai.']
+        ['Pick your own distance', 'One route you can repeat, as many times as you like. People track their own laps. Nobody is checking, and there is no list at the end with everyone’s numbers on it.'],
+        ['Beat your longest run, if you want', 'It’s the challenge most people set themselves, and it’s a good one, because it’s different for everybody. It is not a condition of anything. You can stop whenever you’ve had enough.'],
+        ['Start together, done by sunset', 'One start, in the morning, everyone at once. After that the day is yours. Running stops at sunset whether you’re ready or not, and then the evening starts.'],
+        ['Bring your own', 'Tent, food, drinks, water and whatever you run on. Plan for self-supported. Catering, cabins, a pool and staffed aid stops are all still open questions, so don’t pack as though they’re settled.'],
+        ['Come for the vibes', 'Friends, crew, partners and people who have no intention of running are welcome and genuinely wanted. Somebody has to hold the speaker.']
       ],
       placeEyebrow: 'Where you’ll be had',
-      placeTitle: 'Place of Dreams',
-      placeLede: '3,700 hectares of semi-desert in the Karoo Hoogland, with a million-year-old canyon, an ancient waterfall and houses made of natural stone. It runs on solar and good intentions. It describes itself as being “in the middle of nowhere”, and it’s being modest.',
-      placePhoto: 'assets/img/pool-day.jpg',
+      placeTitle: 'Somewhere in the Karoo',
+      placeLede: 'Middle of nowhere, within reason. A VW Polo’s got to make it. We’re still locking the spot down, so take the photos as a general mood rather than a street address. Big sky, dirt underfoot, nothing much for miles.',
+      placePhoto: 'assets/img/van-road.jpg',
       placeFacts: [
-        ['Where', 'Tankwa Karoo, Western Cape. About 50 minutes from Ceres on the R356, the Sutherland road.'],
-        ['Sleep', 'On site. Natural-stone pods with showers, kitchens and solar power, or camping. Booked through Place of Dreams.'],
-        ['Signal', 'Let’s say it’s a feature.'],
-        ['More', '<a href="https://placeofdreams.co.za/" target="_blank" rel="noopener" style="text-decoration:underline">placeofdreams.co.za ↗</a>']
+        ['Where', 'Somewhere in the Karoo. Middle of nowhere, within reason. A VW Polo’s got to make it.'],
+        ['When', 'Sometime in winter. Midwinter, probably. Maybe August. August feels right.'],
+        ['Sleep', 'Bring a tent. Camping is the plan.'],
+        ['Still open', 'The spot, the date, the route and most of the details. Register interest and you’ll hear as they land.']
       ],
       weekendEyebrow: 'The weekend',
       weekend: [
-        ['Friday · arrive', 'Drive in, find your pod, look at the stars, go to bed at nine like a person with plans.'],
-        ['Saturday · 05:55', 'Headtorches. The group photo where everyone looks fresh. It will be the last one.'],
-        ['Saturday · laps', 'The valley, the Cannon, the climb, the Party Bus, the chair you’re not allowed to sit in. Repeat until you’ve made history, personally.'],
-        ['Saturday · after', 'Pool, braai, someone with tongs taking it very seriously. Lies about how many laps.']
+        ['Arrive', 'Drive in, pitch a tent, probably in the dark. Meet the people you will later be overtaken by. Go to bed far too late.'],
+        ['Morning', 'Everyone starts together. Headtorches, cold hands, the group photo where nobody has suffered yet.'],
+        ['All day', 'Laps, at your pace, for as long as you want them. Stop for a chair and a snack. Go again, or don’t.'],
+        ['Sunset', 'Running stops. Fire, food, music and a speaker with a bit of life left in it. Rave with whatever’s left in the tank.']
       ],
-      galleryTitle: ['Last time,', 'on film.'],
-      galleryLede: 'Shot on 35 mm by Justin at the last Crawl, who has no further notes. Everything here happened. Some of it was on purpose.',
+      galleryTitle: ['This isn’t our', 'first bad idea.'],
+      galleryLede: 'Archive shots on 35 mm by Justin from a previous Crawl, who has no further notes. Everything here happened. Some of it was on purpose. None of it is the confirmed spot for this one — treat it as the general idea.',
       gallery: [
         ['assets/img/start-group.jpg', 'Start line. Optimism.', 'w8'],
         ['assets/img/headtorch-laugh.jpg', 'Still laughing', 'w4'],
         ['assets/img/sunrise-road.jpg', 'First light', 'w6'],
-        ['assets/img/canyon.jpg', 'The valley', 'w6'],
-        ['assets/img/coffee-stop.jpg', 'Aid station, artisanal', 'w3'],
+        ['assets/img/canyon.jpg', 'Big country', 'w6'],
+        ['assets/img/coffee-stop.jpg', 'Coffee, artisanal', 'w3'],
         ['assets/img/husky-cab.jpg', 'Management', 'w6'],
         ['assets/img/road-dog.jpg', 'Pacer, unpaid', 'w3'],
         ['assets/img/road-dance.jpg', 'Morale was high. Briefly.', 'w4'],
-        ['assets/img/aid-dog.jpg', 'Aid station', 'w4'],
+        ['assets/img/aid-dog.jpg', 'Support crew', 'w4'],
         ['assets/img/watch-check.jpg', 'Checking a watch that has no good news', 'w4'],
-        ['assets/img/canyon-hike.jpg', 'Up the valley', 'w3'],
+        ['assets/img/canyon-hike.jpg', 'Uphill, obviously', 'w3'],
         ['assets/img/braai.jpg', 'The real finish line', 'w6'],
         ['assets/img/pool-day.jpg', 'Recovery protocol', 'w6'],
         ['assets/img/cactus.jpg', 'Local', 'w3']
       ],
       cta: { photo: 'assets/img/road-wave.jpg', eyebrow: 'Next', title: ['Fine.', 'Where do I sign.'],
-        links: [['tickets.html', 'Get your tickets'], ['index.html', 'Back to the valley']] }
-    },
-
-    tickets: {
-      eyebrow: 'Get your tickets',
-      title: ['A hundred', 'places.', '*That’s it.'],
-      lede: 'Entries for the next Karoo Crawl at Place of Dreams. A hundred places, because the valley is only so wide and the Party Bus is only so big. Prices and the date are being finalised, which is a polite way of saying someone has to call the farm.',
-      tiersTitle: ['Pick your', 'suffering.'],
-      tiers: [   // TODO prices + links
-        { cls: 'card--paper', tag: 'Run only', name: 'The Crawl', price: 'TBC', unit: 'per runner',
-          copy: 'You, the valley, as many laps as it takes. You sort out where you sleep.',
-          items: ['Entry: unlimited laps', 'The Cannon + the Party Bus, every lap', 'Braai at the end', 'A new longest run, guaranteed or your dignity back'],
-          cta: ['#register', 'Register interest'] },
-        { cls: 'card--orange', tag: 'The full weekend', name: 'Crawl & Camp', price: 'TBC', unit: 'per runner', sticker: 'Most sensible',
-          copy: 'Everything in the Crawl, plus two nights at Place of Dreams, so you don’t drive home after your longest run ever like a lunatic.',
-          items: ['Entry: unlimited laps', 'Friday + Saturday night on site', 'Braai + pool access', 'Sunday: lying down'],
-          cta: ['#register', 'Register interest'] },
-        { cls: 'card--navy', tag: 'Not running', name: 'Crew / Plus-one', price: 'TBC', unit: 'per person',
-          copy: 'For the people who come to watch, hold things and say “you look great” without meaning it. Does not count toward the hundred.',
-          items: ['Weekend on site', 'A shift on the Party Bus (optional, encouraged)', 'Braai', 'Bragging rights by association'],
-          cta: ['#register', 'Register interest'] }
-      ],
-      rulesEyebrow: 'Before you click anything',
-      rules: [
-        ['Know your number', 'Your longest run ever. Bring it. That’s your target, plus one step. We’ll take your word for it, which is a mistake.'],
-        ['Headtorch', 'Mandatory. The start is in the dark. Phone torches are not headtorches and we will laugh.'],
-        ['Carry water', 'At least 1 L between aid. The climb to the Party Bus is longer than it looks from the Cannon.'],
-        ['Respect the land', 'Place of Dreams is a private wilderness. Leave nothing but footprints and a bit of your dignity.']
-      ],
-      registerTitle: ['Register interest'],
-      registerLede: 'Tickets open when the date is locked. A hundred places, first come. Leave your name and you’ll hear first.',
-      registerUrl: 'mailto:hello@example.com?subject=Karoo%20Crawl',   // TODO real ticket link or address
-      registerLabel: 'Email us to get on the list',
-      cta: { photo: 'assets/img/braai.jpg', eyebrow: 'The finish', title: ['See you at', 'the fire.'],
-        links: [['about.html', 'About the Crawl'], ['index.html', 'Home']] }
+        links: [['https://tally.so/r/o9RgbO', 'Register interest'], ['index.html', 'Back to the start']] }
     },
 
     partners: {
       eyebrow: 'Partners & sponsors',
-      title: ['Put your name', 'on a valley.', '*Literally.'],
-      lede: 'The Karoo Crawl is a hundred people trying to run further than they ever have, in the middle of nowhere, on purpose. We’re looking for a few brands who think that’s a good idea. Or at least a funny one.',
+      title: ['Help us get', 'the first one', 'off the ground.'],
+      lede: 'The Karoo Crawl is a hundred people running as far as they fancy in the middle of nowhere, then camping and having a party about it. It does not exist yet. We’re looking for a few people and brands who want to help make the first one happen — and who’d like their name on it permanently.',
       whyTitle: ['Why bother'],
       why: [
-        ['A hundred people at their limit', 'Everyone here is attempting the longest run of their life. They will remember who handed them a Coke at the Party Bus for the rest of their lives. That’s not marketing, it’s trauma bonding.'],
-        ['Content that makes itself', 'Sunrise in the Tankwa, headtorches in a valley, a bus having a party at the top of a climb. Shot on film. Your logo will look better here than anywhere else it’s been.'],
-        ['Small on purpose', 'A hundred places, not ten thousand. Nobody is a number on a bib wall. Your brand isn’t either.']
+        ['It’s the first one', 'Nothing is locked. No history, no incumbents, nobody else’s logo in the photos. Whoever helps now is part of how the thing gets built, not a sticker applied afterwards.'],
+        ['Got a crew? Bring them', 'If you’re a brand, a run club or just a group chat that runs together, bring your people along to run, camp, help out or stand near the fire. That’s not a package. It’s an open invitation.'],
+        ['Small on purpose', 'A hundred runners, plus crew and hangers-on. Nobody is a number on a bib wall. Your name isn’t either.']
       ],
-      packagesTitle: ['Ways in'],
-      packagesLede: 'Three ways to be involved. All of them are negotiable, except the bit where the Cannon stays a cannon.',
-      packages: [   // TODO pricing + inclusions
-        { cls: 'card--orange', tag: 'One only', name: 'Title partner', price: 'Let’s talk', unit: '', sticker: 'Presented by',
-          copy: '“The Karoo Crawl, presented by you.” Your name on everything, including the hundred people’s new favourite memory.',
-          items: ['Name in the event title', 'Logo on the start/finish, bibs and site', 'Brand presence at Place of Dreams all weekend', 'Film photo + content package'],
-          cta: ['#enquire', 'Enquire'] },
-        { cls: 'card--navy', tag: 'Two available', name: 'Aid station partner', price: 'Let’s talk', unit: '',
-          copy: 'Take over the Cannon or the Party Bus. Every runner passes it every lap. That’s a lot of laps.',
-          items: ['Naming rights: “The Party Bus by you”', 'Your product, handed out every lap', 'Station dressing, flags, music (bus only)', 'Feature on the route map and site'],
-          cta: ['#enquire', 'Enquire'] },
-        { cls: 'card--paper', tag: 'In kind', name: 'Product partner', price: 'Bring stuff', unit: '',
-          copy: 'Fuel, drinks, kit, coffee, sunscreen, things that go on a braai. If runners need it at 05:55 or 18:00, we want to hear from you.',
-          items: ['Product in the runner pack', 'Sampling at the aid stations', 'Logo on the partners page', 'Our eternal, slightly dehydrated gratitude'],
-          cta: ['#enquire', 'Enquire'] }
+      // One ask, not a tier sheet. Four things we need, no prices, no buttons
+      // on the cards - the single CTA is the block at the bottom of the page.
+      packagesTitle: ['What we need'],
+      packagesLede: 'Short version: everything. It’s a running event and a festival in the same field, with a long day in between for people who’ve finished or never started. Pick any part of that and help with it. Money also works, and covers all four at once.',
+      packages: [
+        ['Somewhere to put it', 'A farm, a reserve, a stretch of nowhere with road access and room for a hundred tents. Everything else is waiting on this one.'],
+        ['The running part', 'Water, fuel, food, kit, medical cover and people to hand out cups. The unglamorous half, and the half that keeps everyone upright.'],
+        ['The party part', 'Sound, lights, power, somewhere to put a fire and something cold at the end of it. A festival with a run attached, or the other way round.'],
+        ['The bit in between', 'People finish at different times and plenty never start. That’s a long day in a field. Shade, coffee, somewhere to sit, something to do.']
       ],
       factsTitle: ['The numbers'],
       facts: [
-        ['Runners', '100, capped'],
-        ['Crew + plus-ones', 'On top of the hundred'],
-        ['Where', 'Place of Dreams, Tankwa Karoo (R356, ~50 min past Ceres)'],
-        ['When', 'August 2027, date TBC'],
-        ['Format', 'Lapped valley loop. No set distance. Run further than you ever have.'],
-        ['Aid', 'The Cannon + the Party Bus, every lap']
+        ['Runners', '100 — the target for now'],
+        ['Crew + hangers-on', 'On top, and still open'],
+        ['Where', 'Somewhere in the Karoo. Middle of nowhere, within reason. A VW Polo’s got to make it.'],
+        ['When', 'Sometime in winter. Midwinter, probably. Maybe August. August feels right.'],
+        ['Format', 'Start together, a route you can repeat, your own distance, done by sunset.'],
+        ['After', 'Camping, a fire, music and a party.']
       ],
-      enquireTitle: ['Become a partner'],
-      enquireLede: 'Tell us who you are and which bit of the valley you want. We’ll send the deck, and then we’ll talk about the deck, and then someone will mention the braai.',
-      enquireUrl: 'mailto:hello@example.com?subject=Karoo%20Crawl%20partnership',   // TODO real partnerships address
-      enquireLabel: 'Email us about partnering',
-      cta: { photo: 'assets/img/road-dance.jpg', eyebrow: 'Or just come run it', title: ['A hundred places.', 'Don’t be a sponsor.', 'Be a statistic.'],
-        links: [['tickets.html', 'Get your tickets'], ['about.html', 'About the Crawl']] }
+      enquireTitle: ['Become a Founding Partner'],
+      enquireLede: 'Help us get the first Crawl off the ground and we’ll always credit you as a Founding Partner. Even if you never sponsor another edition, you’ll still be one of the original brands that made it happen. Tell us what you can bring and we’ll take it from there.',
+      // Kept for reference: the Founding Partner block no longer carries its own
+      // button, so the page has exactly one way through to the form.
+      enquireUrl: 'https://tally.so/r/o9RgbO',
+      enquireLabel: 'I can help',
+      cta: { photo: 'assets/img/road-dance.jpg', eyebrow: 'One form. That’s the whole process.', title: ['Tell us what', 'you can bring.'],
+        links: [['https://tally.so/r/o9RgbO', 'I can help']] }
     }
   },
 
   footer: {
     title: 'Karoo Crawl',
-    blurb: 'Run further than you ever have, in a valley at Place of Dreams in the Tankwa Karoo. A hundred places. Organised by people who should not be trusted with a clipboard.',
+    blurb: 'A run, a campout and a party, somewhere in the Karoo. Start together, pick your own distance, be done by sunset. Organised by people who should not be trusted with a clipboard.',
     groups: [
-      ['The Crawl', [['index.html', 'Home'], ['about.html', 'About'], ['tickets.html', 'Tickets'], ['partners.html', 'Partners']]],
-      ['Out there', [['https://placeofdreams.co.za/', 'Place of Dreams ↗']]]
+      ['The Crawl', [['index.html', 'Home'], ['about.html', 'About'], ['partners.html', 'Partners']]],
+      ['Get involved', [['https://tally.so/r/o9RgbO', 'Register interest ↗']]]
     ],
-    big: 'See you at the Party Bus.',
-    legal: 'Indicative route through the valley at Place of Dreams; final route TBC. Contours: AWS Terrain Tiles. Photos on 35 mm by Justin.',
+    big: 'See you at the fire.',
+    legal: 'Indicative route only; spot, date and route all still TBC. Contours: AWS Terrain Tiles. Photos on 35 mm by Justin.',
     legalRight: 'Distance not included. That’s on you.'
   }
 };

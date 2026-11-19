@@ -35,13 +35,17 @@
   nav.querySelector('.nav__burger').addEventListener('click', () => nav.classList.toggle('open'));
 
   function tickCountdown() {
-    const ms = window.RACE ? RACE.date - new Date() : 0;
     const el = nav.querySelector('[data-countdown]');
+    // No date to count down to yet, so the slot carries a fixed line instead
+    // of a clock. Same element, same styling.
+    if (CT.site.countdownStatic) { el.textContent = H.t(CT.site.countdownStatic); return; }
+    const ms = window.RACE ? RACE.date - new Date() : 0;
     if (ms <= 0) { el.textContent = H.t(CT.site.countdownDone); return; }
     const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
     el.textContent = `${d}d ${String(h).padStart(2, '0')}h ${String(m).padStart(2, '0')}m`;
   }
-  tickCountdown(); setInterval(tickCountdown, 30000);
+  tickCountdown();
+  if (!CT.site.countdownStatic) setInterval(tickCountdown, 30000);
 
   /* ---------------- smooth scroll ---------------- */
   let lenis = null;
