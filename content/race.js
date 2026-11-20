@@ -142,7 +142,7 @@ window.CONTENT = {
         title: 'Everything you need to know. It isn’t much.',
         // big value + title + text, shuffled in like a deck as you scroll
         cards: [
-          { colour: 'orange', icon: 'DST', grade: 'Yours', title: 'Your distance', text: 'No set distance and no set pace. This is only an ultra if you want it to be. Run slow, run fast, just run as far as you can — and if you want a target, the furthest you’ve ever run is sitting right there.' },
+          { colour: 'orange', icon: 'DST', grade: 'Yours', title: 'Your distance', text: 'No set distance and no set pace. This is only an ultra if you want it to be. Run slow, run fast, just run as far as you can. If you want a target, the furthest you’ve ever run is sitting right there.' },
           { colour: 'lime', icon: 'GUN', grade: 'Stars', title: 'One start', text: 'Everyone goes at once, early, running under the stars. It’s the only organised part of the day. It’s also the best photo you’ll take all weekend.' },
           { colour: 'sky', icon: 'SUN', grade: 'Sunset', title: 'Done by dark', text: 'Call it whenever you like. One lap is a fine day out. Everyone stops by sunset. That’s not really a cut-off. That’s when the other thing starts.' },
           { colour: 'navy', icon: 'KIT', grade: 'BYO', title: 'Bring your own', text: 'Tent, food, drinks, water and whatever you run on. Treat it as self-supported and pack like it. Anything past that is still being worked out.' },
@@ -194,7 +194,7 @@ window.CONTENT = {
         ['Sunset', 'Running stops. Fire, food, a DJ line-up and a speaker with a bit of life left in it. Rave with whatever’s left in the tank.']
       ],
       galleryTitle: ['This isn’t our', 'first bad idea.'],
-      galleryLede: 'Archive shots on 35 mm by Justin from a previous Crawl, who has no further notes. Everything here happened. Some of it was on purpose. None of it is the confirmed spot for this one — treat it as the general idea.',
+      galleryLede: 'Archive shots on 35 mm by Justin from a previous Crawl, who has no further notes. Everything here happened. Some of it was on purpose. None of it is the confirmed spot for this one. Treat it as the general idea.',
       gallery: [
         ['assets/img/start-group.jpg', 'Start line. Optimism.', 'w8'],
         ['assets/img/headtorch-laugh.jpg', 'Still laughing', 'w4'],
@@ -218,7 +218,7 @@ window.CONTENT = {
     partners: {
       eyebrow: 'Partners & sponsors',
       title: ['Help us get', 'the first one', 'off the ground.'],
-      lede: 'The Karoo Crawl is a hundred people running as far as they fancy in the middle of nowhere, then camping and having a party about it. It does not exist yet. We’re looking for a few people and brands who want to help make the first one happen — and who’d like their name on it permanently.',
+      lede: 'The Karoo Crawl is a hundred people running as far as they fancy in the middle of nowhere, then camping and having a party about it. It does not exist yet. We’re looking for a few people and brands who want to help make the first one happen. And who’d like their name on it permanently.',
       whyTitle: ['Why bother'],
       why: [
         ['It’s the first one', 'Nothing is locked. No history, no incumbents, nobody else’s logo in the photos. Whoever helps now is part of how the thing gets built, not a sticker applied afterwards.'],
@@ -237,7 +237,7 @@ window.CONTENT = {
       ],
       factsTitle: ['The numbers'],
       facts: [
-        ['Runners', '100 — the target for now'],
+        ['Runners', '100, for now'],
         ['Crew + hangers-on', 'On top, and still open'],
         ['Where', 'Somewhere in the Karoo. Middle of nowhere, within reason. A VW Polo’s got to make it.'],
         ['When', 'Sometime in winter. Midwinter, probably. Maybe August. August feels right.'],
@@ -245,7 +245,7 @@ window.CONTENT = {
         ['After', 'Camping, a fire, music and a party.']
       ],
       enquireTitle: ['Become a Founding Partner'],
-      enquireLede: 'Help us get the first Crawl off the ground and you’re a Founding Partner for good. Not just this one. Every edition after it carries the people who made the first one possible — on the site, on the start line, in the programme, wherever the Crawl’s name ends up. You never have to sponsor again to keep it. Tell us what you can bring and we’ll take it from there.',
+      enquireLede: 'Help us get the first Crawl off the ground and you’re a Founding Partner for good. Not just this one. Every edition after it carries the people who made the first one possible. On the site, on the start line, in the programme, wherever the Crawl’s name ends up. You never have to sponsor again to keep it. Tell us what you can bring and we’ll take it from there.',
       // Kept for reference: the Founding Partner block no longer carries its own
       // button, so the page has exactly one way through to the form.
       enquireUrl: 'https://tally.so/r/o9RgbO',
